@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello
+  name: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: openshiftindia/spring-ms:1.0
+        imagePullPolicy: IfNotPresent
+        name: spring-ms
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello
+  name: hello-v1
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP 
+    targetPort: 8080
+  selector:
+    app: hello

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    ver: "1.22"
+spec:
+  replicas: 5
+
+  selector:
+    matchLabels:
+      app: nginx
+      ver: "1.22"
+
+  name: nginx
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+        ver: "1.22"
+
+    spec:
+      containers:
+      - image: bitnami/nginx:1.23
+        name: nginx
